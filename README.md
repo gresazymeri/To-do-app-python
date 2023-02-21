@@ -10,9 +10,9 @@ This repository is a simple todo app built with Python3 and MySQL. This applicat
 
 # Screenshots
 
-![Image](pictures/Screenshot 2023-02-21 at 14.44.52.png)
-![Image](pictures/Screenshot 2023-02-21 at 14.45.02.png)
-![Image](pictures/Screenshot 2023-02-21 at 14.45.09.png)
-![Image](pictures/Screenshot 2023-02-21 at 15.00.34.png)
-![Image](pictures/Screenshot 2023-02-21 at 15.00.44.png)
-![Image](./pictures/Screenshot 2023-02-21 at 15.03.36.png)
+![create-task](pictures/create-task.png)
+![edit-task](pictures/edit-task.png)
+![dashboard](pictures/dashboard.png)
+![home](pictures/home.png)
+![login](pictures/login.png)
+![register](./pictures/register.png)
