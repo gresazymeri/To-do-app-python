@@ -1,26 +1,11 @@
-import datetime
 from django.contrib import messages
 from .models import Task
-# from .forms import RegisterForm, BmiForm, InstructorForm, OnlineFitnessForm
 from django.contrib.auth.decorators import login_required
-from django.views.generic import FormView, TemplateView
-
-# from .models import Instructor, Payment_Plan, Payment
 from .forms import RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.shortcuts import render
-
-# from .forms import RegisterForm, BmiForm, InstructorForm
-# from .models import Instructor
-import os
-import json
-import smtplib
-import ssl
-from django.contrib.auth import views
-
 
 # Home
 def home(request):

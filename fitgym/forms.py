@@ -1,11 +1,6 @@
-from http import client
-from ssl import Options
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from django_select2.forms import Select2MultipleWidget
-from django.conf import settings
-from django.core.mail import send_mail
 
 
 class RegisterForm(UserCreationForm):
