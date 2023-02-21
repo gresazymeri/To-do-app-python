@@ -7,7 +7,7 @@ This repository is a simple todo app built with Python3 and MySQL. This applicat
 - Clone the repository.
 - Install the required dependencies using the following command: `pip3 install -r requirements.txt`.
 - Create a MySQL database.
-- Open the `app/settings.py` file and modify the following variables with your MySQL database credentials: `PORT,HOST,PASSWORDUSER,NAME`.
+- Open the `app/settings.py` file and modify the following variables with your MySQL database credentials: `PORT,HOST,PASSWORD,USER,NAME`.
 
 ## Starting local server
 
