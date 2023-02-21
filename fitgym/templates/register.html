@@ -1,0 +1,74 @@
+{% extends "dashboard/base.html" %} {% block content %}
+<section class="h-100">
+  <div class="container h-100">
+    <div class="row justify-content-sm-center h-100">
+      <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+        <div class="text-center my-5">
+        </div>
+        <div class="card shadow-lg">
+          <div class="card-body p-5">
+            <h1 class="fs-4 card-title fw-bold mb-4">Register</h1>
+
+            {% if messages %}
+              {% for message in messages %}
+                  <div class="alert alert-warning {{ message.tags }} m-2" role="alert">
+                      {{ message }}
+                  </div>
+              {% endfor %}
+            {% endif %} 
+
+            {% if forms.errors %}
+                {% for field in forms %}
+                    {% for error in field.errors %}
+                        <span style="color:rgb(214, 60, 60); font-size: 18px;">{{ error|escape }}</span>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in forms.non_field_errors %}
+                    {{ error|escape }}
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" class="needs-validation">
+              {% csrf_token %}
+
+              <div class="mb-3">
+                <label class="mb-2 text-muted" for="email">Username</label>
+                <input id="email" type="text" class="form-control" name="username" required autofocus>
+              </div>
+
+              <div class="mb-3">
+                <label class="mb-2 text-muted" for="email">Email</label>
+                <input id="email" type="text" class="form-control" name="email" required autofocus>
+              </div>
+
+              <div class="mb-3">
+                <div class="mb-2 w-100">
+                  <label class="text-muted" for="password">Password</label>
+                </div>
+                <input id="password" type="password" class="form-control" name="password1" required>
+              </div>
+              <div class="mb-3">
+                <div class="mb-2 w-100">
+                  <label class="text-muted" for="password">Confirm Password</label>
+                </div>
+                <input id="password" type="password" class="form-control" name="password2" required>
+              </div>
+
+              <div class="d-flex align-items-center">
+                <button type="submit" class="btn btn-primary ms-auto">
+                    Register
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer py-3 border-0">
+            <div class="text-center">
+             Already have an account? <a href="{% url 'login' %}" class="text-dark">Register</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

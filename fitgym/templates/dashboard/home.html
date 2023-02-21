@@ -1,0 +1,180 @@
+{% extends "dashboard/base.html" %} {% block content %}
+
+<style>
+  .task-id-done,
+  .task-title-done,
+  .task-due-date-done {
+    text-decoration: line-through;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10" style="float: none; margin: auto">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+      >
+        <h1 class="h3">Welcome, {{ user.get_username }} 👋</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-success"
+            style="margin-right: 10px"
+          >
+            <a class="text-decoration-none" href="{% url 'create_task' %}"
+              >Create Task</a
+            >
+          </button>
+
+          <button type="button" class="btn btn-sm btn-outline-secondary">
+            <a class="text-decoration-none" href="{% url 'logout' %}">Logout</a>
+          </button>
+        </div>
+      </div>
+
+      {% if messages %}
+      <div class="row">
+        <div class="col-md-12">
+          {% for message in messages %}
+          <div class="alert alert-warning" role="alert">{{ message }}</div>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div
+                    class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+                  >
+                    Completed
+                  </div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">
+                    {{ totalTasksCompleted }}
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-check fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div
+                    class="text-xs font-weight-bold text-success text-uppercase mb-1"
+                  >
+                    Pending
+                  </div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800">
+                    {{ totalTasksPending }}
+                  </div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-list-check fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card shadow mb-4">
+            <div
+              class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+            >
+              <h6 class="m-0 font-weight-bold text-primary">Tasks</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Title</th>
+                      <th>Due Date</th>
+                      <th style="text-align: center">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                      <td class="{% if task.done %}task-id-done{% endif %}">
+                        {{ task.id }}
+                      </td>
+                      <td class="{% if task.done %}task-title-done{% endif %}">
+                        {{ task.title }}
+                      </td>
+                      <td
+                        class="{% if task.done %}task-due-date-done{% endif %}"
+                      >
+                        {{ task.due_date }}
+                      </td>
+                      <td style="text-align: center">
+                        {% if task.done %}
+                        <div style="text-decoration: line-through">
+                          Completed
+                        </div>
+                        {% else %}
+                        <form
+                          method="POST"
+                          action=" {% url 'complete_task' task.id %}"
+                          style="display: inline"
+                        >
+                          {% csrf_token %}
+                          <button
+                            type="submit"
+                            class="btn btn-secondary me-3 btn-sm"
+                          >
+                            <i class="fa-solid fa-check text-light"></i>
+                          </button>
+                        </form>
+
+                        <button
+                          type="button"
+                          class="btn btn-success me-3 btn-sm"
+                        >
+                          <a href="{% url 'edit_task' task.id %}">
+                            <i class="fa-solid fa-pen-to-square text-light"></i>
+                          </a>
+                        </button>
+
+                        <form
+                          method="POST"
+                          action=" {% url 'delete_task' task.id %}"
+                          style="display: inline"
+                        >
+                          {% csrf_token %}
+                          <button
+                            type="submit"
+                            class="btn btn-danger me-3 btn-sm"
+                          >
+                            <i class="fa-solid fa-trash-alt text-light"></i>
+                          </button>
+                        </form>
+                        {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
